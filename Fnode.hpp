@@ -23,9 +23,13 @@ public: // all method and mombers are public for easy acsess in my first CPP cla
     string _name;
     int _id;
     /////Constructors/////
-    //
+    // Default constructor , may be usefull?
     Fnode()
     {
+        _father = NULL;
+        _mother = NULL;
+        _name = "Empty Root Constructor";
+        _id = 1;
 
     }
     // This constructor is used to init the root of the Tree class.
@@ -43,8 +47,9 @@ public: // all method and mombers are public for easy acsess in my first CPP cla
         this->_mother=NULL;
         this->_id = id;
     }
-
-   bool setFather(Fnode* Father);
+    //string to_string();
+    bool setFather(Fnode* Father);
+    string myFather();
     int getID();
 
 

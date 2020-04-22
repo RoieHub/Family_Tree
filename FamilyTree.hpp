@@ -9,21 +9,23 @@ namespace family {
 
     class Tree {
     public:
-        Fnode _root;
+        Fnode* _root;
         std::map<std::string,Fnode> _Fmap;
 
         Tree()
         {
-            this->_root = new Fnode("Me");
+            _root = new Fnode("Me");
+            _Fmap[_root->_name] = *_root; // _root* is the Fnode _root is pointing at.
         }
         Tree(string name)
         {
             //cout << name << endl;//For debugging
-            Fnode root = Fnode(name);
-            //_Fmap[name] = Tree(string name);
+            _root = new Fnode(name);
+            _Fmap[name] = *_root;
         }
         bool addFather(string child, string father);
-
+        //Returns true there is a key mapped to this name, else no such key exist return false
+        bool nodeExist(string name);
         bool addMother(string child, string mother);
 
         string relation(string name);
@@ -33,6 +35,14 @@ namespace family {
         void display();
 
         void remove(string name);
+
+        //Return the node which key is "name" if no such node exist trows ast::out_of_range Error.
+        Fnode getNode(string name);
+
+        //Fnode getNode(int id);
+
+        //Returns the Fnode the root is pointing at.
+        Fnode getRoot();
 
     };
 }

@@ -11,9 +11,12 @@ bool Fnode::setFather(Fnode* Father)
     }
     else
     {
+        cout<< "I allready have a father and its not you!" << endl;
         return false;
     }
+
 }
+
 bool Fnode::setMother(Fnode* Mother)
 {
     if(this->_mother == NULL) {
@@ -30,6 +33,13 @@ int Fnode::getID()
 {
     return this->_id;
 }
+/*string Fnode::to_string()
+{
+    string ans;
+    ans << "I am:"<this->_name<"\nMy Id is :"<this->_id<endl;
+    return ans;
+}*/
+string Fnode::myFather() {return this->_father->_name;}
 
 
 
