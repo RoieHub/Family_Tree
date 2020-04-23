@@ -1,20 +1,20 @@
-CXX=clang++-9
+#!make -f
+
+CXX=clang++-9 
 CXXFLAGS=-std=c++2a
 
-all: a.out
-	./a.out
+HEADERS := $(wildcard *.h*)
+STUDENT_SOURCES := $(filter-out $(wildcard Test*.cpp), $(wildcard *.cpp))
+STUDENT_OBJECTS := $(subst .cpp,.o,$(STUDENT_SOURCES))
 
-a.out: Fnode.o FamilyTree.o
-	$(CXX) $(CXXFLAGS) FamilyTree.o -o a.out
+run: test
+	./$^
 
-Fnode.o: Fnode.cpp Fnode.hpp
-	$(CXX) $(CXXFLAGS) --compile Fnode.cpp -o Fnode.o
+test: TestRunner.o Test_ariel.o Test_hila.o $(STUDENT_OBJECTS)
+	$(CXX) $(CXXFLAGS) $^ -o test
 
-FamilyTree.o:FamilyTree.cpp FamilyTree.hpp Fnode.hpp
-	$(CXX) $(CXXFLAGS) --compile FamilyTree.cpp -o FamilyTree.o
-
-
+%.o: %.cpp $(HEADERS)
+	$(CXX) $(CXXFLAGS) --compile $< -o $@
 
 clean:
-	rm -f *.o a.out
-
+	rm -f *.o test
