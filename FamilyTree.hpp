@@ -10,18 +10,18 @@ namespace family {
     class Tree {
     public:
         Fnode* _root;
-        std::map<std::string,Fnode> _Fmap;
+        std::map<std::string,Fnode*> _Fmap;
 
         Tree()
         {
             _root = new Fnode("Me");
-            _Fmap[_root->_name] = *_root; // _root* is the Fnode _root is pointing at.
+            _Fmap[_root->_name] = _root; // _root* is the Fnode _root is pointing at.
         }
         Tree(string name)
         {
             //cout << name << endl;//For debugging
             _root = new Fnode(name);
-            _Fmap[name] = *_root;
+            _Fmap[name] = _root;
         }
         bool addFather(string child, string father);
         //Returns true there is a key mapped to this name, else no such key exist return false
@@ -37,7 +37,8 @@ namespace family {
         void remove(string name);
 
         //Return the node which key is "name" if no such node exist trows ast::out_of_range Error.
-        Fnode getNode(string name);
+        Fnode* getNode(string name);
+        Fnode* getNode_imp(string);
 
         //Fnode getNode(int id);
 

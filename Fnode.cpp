@@ -25,6 +25,7 @@ bool Fnode::setMother(Fnode* Mother)
     }
     else
     {
+        cout<< "I allready have a mother and its not you!" << endl;
         return false;
     }
 }
